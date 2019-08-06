@@ -5,7 +5,7 @@
   const MAP_BOTTOM = 130;
   const map = document.querySelector('.map');
   const mainPin = map.querySelector('.map__pin--main');
-  const mapRect = map.getBoundingClientRect();
+
   const mainPinCenterCoord = {
     x: mainPin.offsetWidth / 2,
     y: mainPin.offsetHeight / 2
@@ -21,6 +21,7 @@
   const slider = function (callback) {
     mainPin.addEventListener('mousedown', function (evt) {
       let startCoord = new Coordinate(evt.clientX, evt.clientY);
+      const mapRect = map.getBoundingClientRect();
 
       const onMouseMove = function (moveEvt) {
         moveEvt.preventDefault();
@@ -28,11 +29,11 @@
         startCoord = new Coordinate(moveEvt.clientX, moveEvt.clientY);
         let pinPosition = new Coordinate(mainPin.offsetLeft - shift.x, mainPin.offsetTop - shift.y);
 
-        if (startCoord.y < MAP_BOTTOM +  mainPinCenterCoord.y) {
+        if (startCoord.y - mapRect.top < MAP_BOTTOM +  mainPinCenterCoord.y) {
           pinPosition.y = MAP_BOTTOM;
         }
 
-        if (startCoord.y > MAP_TOP + mainPinCenterCoord.y) {
+        if (startCoord.y - mapRect.top > MAP_TOP + mainPinCenterCoord.y) {
           pinPosition.y = MAP_TOP;
         }
 
