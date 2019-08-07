@@ -42,6 +42,24 @@
     });
   };
 
+  const errorTemplate = document.querySelector('#error').content
+  const main = document.querySelector('main');
+
+  const onErrorBtnClick = function () {
+    const errorBlock = document.querySelector('.error');
+    errorBlock.remove();
+  }
+
+  const onErrorLoad = function () {
+    let cloneError = errorTemplate.cloneNode(true);
+    main.appendChild(cloneError);
+
+    const errorBtns = document.querySelectorAll('.error__button');
+    errorBtns.forEach((btn) => {
+      btn.addEventListener('click', onErrorBtnClick);
+    });
+  };
+
   const movePin = function (coord) {
     mapPins.appendChild(fragment);
     map.classList.remove('map--faded');
@@ -52,6 +70,7 @@
   window.slider(movePin)
 
   window.renderPin = {
-    onLoad: onLoad
+    onLoad: onLoad,
+    onErrorLoad: onErrorLoad
   }
 })();
