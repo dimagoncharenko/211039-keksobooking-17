@@ -22,7 +22,7 @@
       }
     })
     .then((data) => onLoad(data))
-  }
+  };
 
   load(Url.LOAD, Method.GET, window.renderPin.onLoad)
 })();
