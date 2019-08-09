@@ -1,76 +1,60 @@
 'use strict';
 
 (function () {
-  const map = document.querySelector('.map');
-  const fragment = document.createDocumentFragment();
-  const pinTemplate = document.querySelector('#pin').content;
-  const mapPins = map.querySelector('.map__pins');
-  const form = document.querySelector('.ad-form');
-  const formElements = form.querySelectorAll('fieldset');
-  const inputAddress = form.querySelector('#address');
-  const centerCoord = {
-    x: map.offsetWidth / 2,
-    y: map.offsetHeight / 2
-  }
+  let map = document.querySelector('.map');
+  let fragment = document.createDocumentFragment();
+  let pinTemplate = document.querySelector('#pin').content;
+  let mapPins = map.querySelector('.map__pins');
+  let form = document.querySelector('.ad-form');
+  let inputAddress = form.querySelector('#address');
+  let errorTemplate = document.querySelector('#error').content
+  let main = document.querySelector('main');
+  let mainPin = document.querySelector('.map__pin--main');
 
-  const disableForm = function () {
-    form.classList.add('ad-form--disabled');
-    formElements.forEach((element) => {
-      element.disabled = true;
+  window.statusPage.onPageDeactivate();
+  mainPin.addEventListener('click', window.statusPage.onPageActivate);
+
+  let renderPins = function (pins) {
+    let clonePins = pins.slice(0, 5);
+    clonePins.forEach((pin) => {
+      let clonePinTemplate = pinTemplate.querySelector('.map__pin').cloneNode(true);
+      clonePinTemplate.style.left = pin.location.x - 50 + 'px';
+      clonePinTemplate.style.top = pin.location.y - 70 + 'px';
+      clonePinTemplate.querySelector('img').src = pin.author.avatar;
+      clonePinTemplate.querySelector('img').alt = pin.offer.title;
+      fragment.appendChild(clonePinTemplate);
     });
+    mapPins.appendChild(fragment);
   };
 
-  disableForm();
-
-  inputAddress.value = centerCoord.x + ',' + centerCoord.y;
-
-  const enableForm = function () {
-    form.classList.remove('ad-form--disabled');
-    formElements.forEach((element) => {
-      element.disabled = false;
-    });
-  }
-
-  const onLoad = function (pins) {
-    pins.forEach((pin) => {
-      const clonePin = pinTemplate.querySelector('.map__pin').cloneNode(true);
-      clonePin.style.left = pin.location.x - 50 + 'px';
-      clonePin.style.top = pin.location.y - 70 + 'px';
-      clonePin.querySelector('img').src = pin.author.avatar;
-      clonePin.querySelector('img').alt = pin.offer.title;
-      fragment.appendChild(clonePin);
-    });
+  let onLoad = function (pins) {
+    window.filter(pins);
+    window.store.setData(pins);
   };
 
-  const errorTemplate = document.querySelector('#error').content
-  const main = document.querySelector('main');
-
-  const onErrorBtnClick = function () {
+  let onErrorBtnClick = function () {
     const errorBlock = document.querySelector('.error');
     errorBlock.remove();
-  }
+  };
 
-  const onErrorLoad = function () {
+  let onErrorLoad = function () {
     let cloneError = errorTemplate.cloneNode(true);
     main.appendChild(cloneError);
-
     const errorBtns = document.querySelectorAll('.error__button');
     errorBtns.forEach((btn) => {
       btn.addEventListener('click', onErrorBtnClick);
     });
   };
 
-  const movePin = function (coord) {
-    mapPins.appendChild(fragment);
-    map.classList.remove('map--faded');
-    enableForm();
+  let movePin = function (coord) {
     inputAddress.value = coord.x + ',' + coord.y;
   }
 
-  window.slider(movePin)
+  window.slider(movePin);
 
   window.renderPin = {
     onLoad: onLoad,
-    onErrorLoad: onErrorLoad
+    onErrorLoad: onErrorLoad,
+    render: renderPins
   }
 })();

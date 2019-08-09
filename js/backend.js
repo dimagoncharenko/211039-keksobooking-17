@@ -13,15 +13,17 @@
   }
 
 
-  const load = (url, method, onLoad, onError) => {
+  let load = (url, method, onLoad, onError) => {
     fetch(url, {
       method: method
     })
       .then((response) => {
         if (response.status === STATUS_SUCCESS) {
-          response.json()
+          return response.json();
+        } else {
+          throw response.status
         }
-        throw response.status
+
       })
       .then((data) => onLoad(data))
       .catch((err) => onError(`Ошибка ${err}`))

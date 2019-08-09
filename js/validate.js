@@ -1,31 +1,15 @@
 'use strict';
 
 (function () {
-  const typeSelect = document.querySelector('select[name="type"]');
-  const minPriceInput = document.querySelector('input[name="price"]');
-  const addressInput = document.querySelector('input[name="address"]');
-  const timeInSelect = document.querySelector('select[name="timein"]');
-  const timeOutSelect = document.querySelector('select[name="timeout"]');
-  const btnSubmit = document.querySelector('.ad-form__submit');
-  const btnReset = document.querySelector('.ad-form__reset');
-  const mainPin = document.querySelector('.map__pin--main');
-  const form = document.querySelector('.ad-form');
-  const inputAddress = document.querySelector('input[name="address"]');
+  let typeSelect = document.querySelector('select[name="type"]');
+  let minPriceInput = document.querySelector('input[name="price"]');
+  let addressInput = document.querySelector('input[name="address"]');
+  let timeInSelect = document.querySelector('select[name="timein"]');
+  let timeOutSelect = document.querySelector('select[name="timeout"]');
+  let btnSubmit = document.querySelector('.ad-form__submit');
+  let btnReset = document.querySelector('.ad-form__reset');
 
-  const pinStartCoord = {
-    top: mainPin.style.top,
-    left: mainPin.style.left
-  }
-
-  const resetPage= function (evt) {
-    evt.preventDefault();
-    form.reset();
-    mainPin.style.top = pinStartCoord.top;
-    mainPin.style.left = pinStartCoord.left;
-    inputAddress.value =  parseInt(pinStartCoord.top, 10) + ', ' + parseInt(pinStartCoord.left, 10);
-  }
-
-  btnReset.addEventListener('click', resetPage);
+  btnReset.addEventListener('click', window.statusPage.onPageDeactivate);
 
   const MinPrice = {
     BUNGALO: 0,
@@ -34,36 +18,29 @@
     FLAT: 1000
   };
 
-  const AccomodationType = {
-    BUNGALO: 'bungalo',
-    HOUSE: 'house',
-    PALACE: 'palace',
-    FLAT: 'flat'
-  };
-
   addressInput.disabled = true;
 
-  const onSelectTypeChange = function () {
+  let onSelectTypeChange = function () {
     switch (typeSelect.value) {
-      case AccomodationType.BUNGALO:
+      case window.util.AccomodationType.BUNGALO:
         minPriceInput.min = MinPrice.BUNGALO;
         minPriceInput.placeholder = MinPrice.BUNGALO;
         break;
-      case AccomodationType.HOUSE:
+      case window.util.AccomodationType.HOUSE:
         minPriceInput.min = MinPrice.HOUSE;
         minPriceInput.placeholder = MinPrice.HOUSE;
         break;
-      case AccomodationType.PALACE:
+      case window.util.AccomodationType.PALACE:
         minPriceInput.min = MinPrice.PALACE;
         minPriceInput.placeholder = MinPrice.PALACE;
-      case AccomodationType.FLAT:
+      case window.util.AccomodationType.FLAT:
         minPriceInput.min = MinPrice.FLAT;
         minPriceInput.placeholder = MinPrice.FLAT;
         break;
     }
   };
 
-  const onTimeChange = function (evt) {
+  let onTimeChange = function (evt) {
     let currentSelect = evt.currentTarget
     let timeSelectValue = currentSelect.value;
     let option;
@@ -80,31 +57,31 @@
   timeInSelect.addEventListener('change', onTimeChange);
   timeOutSelect.addEventListener('change', onTimeChange);
 
-  const roomNumberSelect = document.querySelector('select[name="rooms"]');
-  const placeNumberSelect = document.querySelector('select[name="capacity"]');
+  let roomNumberSelect = document.querySelector('select[name="rooms"]');
+  let placeNumberSelect = document.querySelector('select[name="capacity"]');
 
-  const PlaceCount = {
+  let PlaceCount = {
     ZERO: '0',
     ONE:'1',
     TWO: '2',
     THREE: '3'
   }
 
-  const RoomCount = {
+  let RoomCount = {
     MUCH: '100',
     ONE: '1',
     TWO: '2',
     THREE: '3'
   }
 
-  const ErrorMessage = {
+  let ErrorMessage = {
     ONE_PLACE: 'Выберите место только для одного человека',
     TWO_PLACE: 'Выберите места для 2 гостей или для 1 гостя',
     THEREE_PLACE: 'Выберите места для 3 гостей, для 2 гостей или для 1 гостя',
     MUCH_PLACE: 'Выберите места не для гостей'
   }
 
-  const checkRoomAndPlace = function () {
+  let checkRoomAndPlace = function () {
     placeNumberSelect.setCustomValidity('');
     let placeNumberValue = placeNumberSelect.value;
     let roomNumberValue = roomNumberSelect.value;
