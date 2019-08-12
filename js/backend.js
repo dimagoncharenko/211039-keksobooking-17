@@ -4,7 +4,8 @@
   const STATUS_SUCCESS = 200;
 
   const Url = {
-    LOAD: 'https://js.dump.academy/keksobooking/data'
+    LOAD: 'https://js.dump.academy/keksobooking/data',
+    UPLOAD: 'https://js.dump.academy/keksobooking'
   };
 
   const Method = {
@@ -29,5 +30,27 @@
       .catch((err) => onError(`Ошибка ${err}`))
   };
 
-  load(Url.LOAD, Method.GET, window.renderPin.onLoad, window.renderPin.onErrorLoad)
+  let upload = (url, method, onLoad, onError, data) => {
+    fetch(url, {
+      method: method,
+      body: data
+    })
+      .then((response) => {
+        if (response.status === STATUS_SUCCESS) {
+          return response.json();
+        } else {
+          throw response.status
+        }
+      })
+      .then((data) => onLoad(data))
+      .catch((err) => onError(`Ошибка ${err}`))
+  }
+
+  load(Url.LOAD, Method.GET, window.renderPin.onLoad, window.message.onError);
+  let form = document.querySelector('.ad-form');
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    upload(Url.UPLOAD, Method.POST, window.message.onSuccess, window.message.onError, new FormData(form));
+  })
 })();

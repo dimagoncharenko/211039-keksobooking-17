@@ -7,8 +7,6 @@
   let mapPins = map.querySelector('.map__pins');
   let form = document.querySelector('.ad-form');
   let inputAddress = form.querySelector('#address');
-  let errorTemplate = document.querySelector('#error').content
-  let main = document.querySelector('main');
   let mainPin = document.querySelector('.map__pin--main');
 
   window.statusPage.onPageDeactivate();
@@ -28,22 +26,7 @@
   };
 
   let onLoad = function (pins) {
-    window.filter(pins);
     window.store.setData(pins);
-  };
-
-  let onErrorBtnClick = function () {
-    const errorBlock = document.querySelector('.error');
-    errorBlock.remove();
-  };
-
-  let onErrorLoad = function () {
-    let cloneError = errorTemplate.cloneNode(true);
-    main.appendChild(cloneError);
-    const errorBtns = document.querySelectorAll('.error__button');
-    errorBtns.forEach((btn) => {
-      btn.addEventListener('click', onErrorBtnClick);
-    });
   };
 
   let movePin = function (coord) {
@@ -54,7 +37,6 @@
 
   window.renderPin = {
     onLoad: onLoad,
-    onErrorLoad: onErrorLoad,
     render: renderPins
   }
 })();

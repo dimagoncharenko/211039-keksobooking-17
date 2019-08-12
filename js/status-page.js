@@ -32,6 +32,7 @@
     let pins = window.store.getData();
     window.renderPin.render(pins);
     window.popup(pins);
+    window.filter(pins);
     activateForm();
     map.classList.remove('map--faded');
     mainPin.removeEventListener('click', onPageActivate);

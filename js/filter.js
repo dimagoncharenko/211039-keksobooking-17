@@ -19,7 +19,6 @@
           let bungaloPins = clonePins.filter((pin) => pin.offer.type === window.util.AccomodationType.BUNGALO);
           updatePins(bungaloPins);
           window.popup(bungaloPins);
-          console.log(bungaloPins);
           break;
         case window.util.AccomodationType.HOUSE:
           let housePins = clonePins.filter((pin) => pin.offer.type === window.util.AccomodationType.HOUSE);

@@ -27,6 +27,6 @@
     removePins: removePins,
     renderNodes: renderNodes,
     KeyCode: KeyCode
-  }
+  };
 
 })();
