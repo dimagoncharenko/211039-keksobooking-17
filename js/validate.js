@@ -93,13 +93,13 @@
     }
 
     if (roomNumberValue === RoomCount.TWO) {
-      if (placeNumberValue !== PlaceCount.ONE || placeNumberValue !== PlaceCount.TWO) {
+      if (placeNumberValue > PlaceCount.TWO || placeNumberValue === PlaceCount.ZERO) {
         placeNumberSelect.setCustomValidity(ErrorMessage.TWO_PLACE);
       }
     }
 
-    if (roomNumberValue === RoomCount.TREE) {
-      if (placeNumberValue === PlaceCount.MUCH) {
+    if (roomNumberValue === RoomCount.THREE) {
+      if (placeNumberValue === PlaceCount.ZERO) {
         placeNumberSelect.setCustomValidity(ErrorMessage.THEREE_PLACE);
       }
     }
