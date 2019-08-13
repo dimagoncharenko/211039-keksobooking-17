@@ -33,24 +33,25 @@
   let upload = (url, method, onLoad, onError, data) => {
     fetch(url, {
       method: method,
-      body: data
+      body: JSON.stringify(data)
     })
       .then((response) => {
         if (response.status === STATUS_SUCCESS) {
-          return response.json();
+          response.json();
+          onLoad();
         } else {
-          throw response.status
+          throw new Error(response.status)
         }
       })
-      .then((data) => onLoad(data))
-      .catch((err) => onError(`Ошибка ${err}`))
+      .catch((err) => onError(console.log(err)))
   }
 
   load(Url.LOAD, Method.GET, window.renderPin.onLoad, window.message.onError);
+
   let form = document.querySelector('.ad-form');
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    upload(Url.UPLOAD, Method.POST, window.message.onSuccess, window.message.onError, new FormData(form));
+    upload(Url.UPLOAD, 'POST', window.message.onSuccess, window.message.onError, new FormData(form));
   })
 })();

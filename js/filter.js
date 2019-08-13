@@ -132,7 +132,7 @@
     filteredPins = onRoomSelectChange(filteredPins);
     filteredPins = onGuestSelectChange(filteredPins);
 
-    updatePins(filteredPins);
+    window.debounce(updatePins.bind(null, filteredPins));
     window.popup(filteredPins);
   };
 
