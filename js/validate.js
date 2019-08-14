@@ -1,13 +1,17 @@
 'use strict';
 
 (function () {
-  let typeSelect = document.querySelector('select[name="type"]');
-  let minPriceInput = document.querySelector('input[name="price"]');
-  let addressInput = document.querySelector('input[name="address"]');
-  let timeInSelect = document.querySelector('select[name="timein"]');
-  let timeOutSelect = document.querySelector('select[name="timeout"]');
-  let btnSubmit = document.querySelector('.ad-form__submit');
-  let btnReset = document.querySelector('.ad-form__reset');
+  let adForm = document.querySelector('.ad-form');
+  let typeSelect = adForm.querySelector('select[name="type"]');
+  let minPriceInput = adForm.querySelector('input[name="price"]');
+  let addressInput = adForm.querySelector('input[name="address"]');
+  let timeInSelect = adForm.querySelector('select[name="timein"]');
+  let timeOutSelect = adForm.querySelector('select[name="timeout"]');
+  let btnSubmit = adForm.querySelector('.ad-form__submit');
+  let btnReset = adForm.querySelector('.ad-form__reset');
+  let fields = adForm.querySelectorAll('#title, #price, #capacity, #room_number');
+  let roomNumberSelect = adForm.querySelector('select[name="rooms"]');
+  let placeNumberSelect = adForm.querySelector('select[name="capacity"]');
 
   btnReset.addEventListener('click', window.statusPage.onPageDeactivate);
 
@@ -57,12 +61,9 @@
   timeInSelect.addEventListener('change', onTimeChange);
   timeOutSelect.addEventListener('change', onTimeChange);
 
-  let roomNumberSelect = document.querySelector('select[name="rooms"]');
-  let placeNumberSelect = document.querySelector('select[name="capacity"]');
-
   let PlaceCount = {
     ZERO: '0',
-    ONE:'1',
+    ONE: '1',
     TWO: '2',
     THREE: '3'
   }
@@ -85,7 +86,6 @@
     placeNumberSelect.setCustomValidity('');
     let placeNumberValue = placeNumberSelect.value;
     let roomNumberValue = roomNumberSelect.value;
-
     if (roomNumberValue === RoomCount.ONE) {
       if (placeNumberValue !== PlaceCount.ONE) {
         placeNumberSelect.setCustomValidity(ErrorMessage.ONE_PLACE);
@@ -111,8 +111,19 @@
     }
   };
 
+
+
   btnSubmit.addEventListener('click', function () {
-    checkRoomAndPlace();
+    fields.forEach((field) => {
+      if (field === roomNumberSelect || field === placeNumberSelect) {
+        checkRoomAndPlace();
+      }
+      if (!field.checkValidity()) {
+        field.style.border = '1px solid red';
+      } else {
+        field.style.border = '';
+      }
+    });
   });
 
 })();
