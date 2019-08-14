@@ -15,12 +15,14 @@
   let renderPins = function (pins) {
     let clonePins = pins.slice(0, 5);
     clonePins.forEach((pin) => {
-      let clonePinTemplate = pinTemplate.querySelector('.map__pin').cloneNode(true);
-      clonePinTemplate.style.left = pin.location.x - 50 + 'px';
-      clonePinTemplate.style.top = pin.location.y - 70 + 'px';
-      clonePinTemplate.querySelector('img').src = pin.author.avatar;
-      clonePinTemplate.querySelector('img').alt = pin.offer.title;
-      fragment.appendChild(clonePinTemplate);
+      if (pin.offer !== undefined) {
+        let clonePinTemplate = pinTemplate.querySelector('.map__pin').cloneNode(true);
+        clonePinTemplate.style.left = pin.location.x - 50 + 'px';
+        clonePinTemplate.style.top = pin.location.y - 70 + 'px';
+        clonePinTemplate.querySelector('img').src = pin.author.avatar;
+        clonePinTemplate.querySelector('img').alt = pin.offer.title;
+        fragment.appendChild(clonePinTemplate);
+      }
     });
     mapPins.appendChild(fragment);
   };

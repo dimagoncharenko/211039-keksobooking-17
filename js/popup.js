@@ -77,21 +77,32 @@
         if (popup !== null) {
           onPopupClose();
         }
+        pin.classList.add('map__pin--active');
         let dataPin = dataPins[i];
         onPinClick(dataPin)
       });
     });
   };
 
-  let popup = function (dataPins) {
+  let getPins = function (dataPins) {
     let currentPins = document.querySelectorAll('.map__pin');
     currentPins = Array.from(currentPins).filter((pin) => !pin.classList.contains('map__pin--main'));
     fillPopup(dataPins, currentPins);
   };
 
+  let removeActivePinClass = function () {
+    let activePin = document.querySelector('.map__pin--active');
+    if (activePin !== null) {
+      activePin.classList.remove('map__pin--active');
+    }
+  }
+
   let onPopupClose = function () {
+    removeActivePinClass();
     let popup = document.querySelector('.popup');
-    popup.remove();
+    if (popup !== null) {
+      popup.remove();
+    }
   };
 
   let onPopupEscPress = function (evt) {
@@ -101,5 +112,8 @@
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
-  window.popup = popup;
+  window.popup = {
+    getPins: getPins,
+    onPopupClose: onPopupClose
+  };
 })();

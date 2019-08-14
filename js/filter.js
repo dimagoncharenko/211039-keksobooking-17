@@ -32,6 +32,8 @@
     let currentPins = document.querySelectorAll('.map__pin');
     window.util.removePins(currentPins);
     window.renderPin.render(newPins);
+    window.popup.getPins(newPins);
+    window.popup.onPopupClose();
   };
 
   let filter = function (pins) {
@@ -133,7 +135,6 @@
     filteredPins = onGuestSelectChange(filteredPins);
 
     window.debounce(updatePins.bind(null, filteredPins));
-    window.popup(filteredPins);
   };
 
   window.filter = filter;

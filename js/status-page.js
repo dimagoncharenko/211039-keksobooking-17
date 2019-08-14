@@ -31,7 +31,7 @@
   let onPageActivate = function () {
     let pins = window.store.getData();
     window.renderPin.render(pins);
-    window.popup(pins);
+    window.popup.getPins(pins);
     window.filter(pins);
     activateForm();
     map.classList.remove('map--faded');
@@ -41,6 +41,10 @@
   let onPageDeactivate = function (evt) {
     if (evt !== undefined) evt.preventDefault();
     deactivateForm();
+    let popup = document.querySelector('.popup');
+    if (popup !== null) {
+      window.popup.onPopupClose();
+    }
     formFilter.reset();
     map.classList.add('map--faded');
     mainPin.style.top = pinStartCoord.top;
