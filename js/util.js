@@ -11,11 +11,15 @@
 
   let KeyCode = {
     ESC: 27
-  }
+  };
 
   let removePins = function (pins) {
     pins = Array.from(pins).filter((pin) => !pin.classList.contains('map__pin--main'));
     pins.forEach((pin) => pin.remove());
+  };
+
+  let removeNodes = function (node) {
+    node.forEach((pin) => pin.remove());
   };
 
   let renderNodes = function (wrapper, nodes) {
@@ -25,6 +29,7 @@
   window.util = {
     AccomodationType: AccomodationType,
     removePins: removePins,
+    removeNodes: removeNodes,
     renderNodes: renderNodes,
     KeyCode: KeyCode
   };

@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  const DEFAULT_AVA_URL = 'img/muffin-grey.svg';
   let map = document.querySelector('.map');
   let form = document.querySelector('.ad-form');
   let formFilter = document.querySelector('.map__filters');
@@ -13,7 +14,14 @@
   }
 
   let deactivateForm = function () {
+    let previewPhoto = document.querySelector('.ad-form-header__preview img');
+    let housePhotos = document.querySelectorAll('.ad-form__photo');
+    previewPhoto.src = DEFAULT_AVA_URL;
     form.classList.add('ad-form--disabled');
+    form.reset();
+    if (housePhotos !== null) {
+      window.util.removeNodes(housePhotos);
+    }
     formFieldset.forEach((element) => {
       element.disabled = true;
     });
@@ -21,7 +29,6 @@
 
   let activateForm = function () {
     form.classList.remove('ad-form--disabled');
-    form.reset();
     inputAddress.value = parseInt(pinStartCoord.top, 10) + ', ' + parseInt(pinStartCoord.left, 10);
     formFieldset.forEach((element) => {
       element.disabled = false;
