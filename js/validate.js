@@ -37,6 +37,7 @@
       case window.util.AccomodationType.PALACE:
         minPriceInput.min = MinPrice.PALACE;
         minPriceInput.placeholder = MinPrice.PALACE;
+        break;
       case window.util.AccomodationType.FLAT:
         minPriceInput.min = MinPrice.FLAT;
         minPriceInput.placeholder = MinPrice.FLAT;
@@ -45,7 +46,7 @@
   };
 
   let onTimeChange = function (evt) {
-    let currentSelect = evt.currentTarget
+    let currentSelect = evt.currentTarget;
     let timeSelectValue = currentSelect.value;
     let option;
     if (currentSelect === timeInSelect) {
@@ -66,21 +67,21 @@
     ONE: '1',
     TWO: '2',
     THREE: '3'
-  }
+  };
 
   let RoomCount = {
     MUCH: '100',
     ONE: '1',
     TWO: '2',
     THREE: '3'
-  }
+  };
 
   let ErrorMessage = {
     ONE_PLACE: 'Выберите место только для одного человека',
     TWO_PLACE: 'Выберите места для 2 гостей или для 1 гостя',
     THEREE_PLACE: 'Выберите места для 3 гостей, для 2 гостей или для 1 гостя',
     MUCH_PLACE: 'Выберите места не для гостей'
-  }
+  };
 
   let checkRoomAndPlace = function () {
     placeNumberSelect.setCustomValidity('');
@@ -110,8 +111,6 @@
       }
     }
   };
-
-
 
   btnSubmit.addEventListener('click', function () {
     fields.forEach((field) => {

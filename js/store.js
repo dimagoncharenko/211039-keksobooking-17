@@ -14,6 +14,6 @@
   window.store = {
     setData: setData,
     getData: getData
-  }
+  };
 
 })();

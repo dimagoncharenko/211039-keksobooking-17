@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var TYPES_OF_IMAGES = {
+  let TYPES_OF_IMAGES = {
     'GIF': '',
     'JPEG': '',
     'PNG': ''
@@ -21,14 +21,14 @@
     img.height = 70;
     img.src = url;
     return img;
-  }
+  };
 
   let changeInputFile = function (evt) {
     let file = evt.currentTarget.files[0];
     showPreviewImage(file, evt);
   };
 
-  var showPreviewImage = function (imageFile, evt) {
+  let showPreviewImage = function (imageFile, evt) {
     let fileRegExp = new RegExp('^image/(' + Object.keys(TYPES_OF_IMAGES).join('|').replace('\+', '\\+') + ')$', 'i');
     if (!fileRegExp.test(imageFile.type)) {
       return;

@@ -12,21 +12,21 @@
     MIDDLE: 'middle',
     HIGH: 'high',
     ANY: 'any'
-  }
+  };
 
   let Room = {
     ONE: '1',
     TWO: '2',
     THREE: '3',
     ANY: 'any'
-  }
+  };
 
   let Guest = {
     ZERO: '0',
     ONE: '1',
     TWO: '2',
     ANY: 'any'
-  }
+  };
 
   let updatePins = function (newPins) {
     let currentPins = document.querySelectorAll('.map__pin');
@@ -126,7 +126,7 @@
     featureInputs.forEach((input) => {
       filteredPins = filteredPins.filter((pin) => {
         return pin.offer.features.some((feature) => feature === input.value);
-      })
+      });
     });
 
     filteredPins = onTypeSelectChange(filteredPins);

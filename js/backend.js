@@ -11,8 +11,7 @@
   const Method = {
     POST: 'POST',
     GET: 'GET'
-  }
-
+  };
 
   let load = (url, method, onLoad, onError) => {
     fetch(url, {
@@ -22,12 +21,12 @@
         if (response.status === STATUS_SUCCESS) {
           return response.json();
         } else {
-          throw response.status
+          throw response.status;
         }
 
       })
       .then((data) => onLoad(data))
-      .catch((err) => onError(`Ошибка ${err}`))
+      .catch((err) => onError(`Ошибка ${err}`));
   };
 
   let upload = (url, method, onLoad, onError, data) => {
@@ -43,8 +42,8 @@
           throw new Error(response.status)
         }
       })
-      .catch((err) => onError(console.log(err)))
-  }
+      .catch((err) => onError(console.log(err)));
+  };
 
   load(Url.LOAD, Method.GET, window.renderPin.onLoad, window.message.onError);
 
@@ -52,6 +51,6 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    upload(Url.UPLOAD, 'POST', window.message.onSuccess, window.message.onError, new FormData(form));
-  })
+    upload(Url.UPLOAD, Method.POST, window.message.onSuccess, window.message.onError, new FormData(form));
+  });
 })();

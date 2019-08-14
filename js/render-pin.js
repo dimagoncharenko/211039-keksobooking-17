@@ -33,12 +33,12 @@
 
   let movePin = function (coord) {
     inputAddress.value = coord.x + ',' + coord.y;
-  }
+  };
 
   window.slider(movePin);
 
   window.renderPin = {
     onLoad: onLoad,
     render: renderPins
-  }
+  };
 })();

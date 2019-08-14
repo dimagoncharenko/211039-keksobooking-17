@@ -50,5 +50,5 @@
   window.message = {
     onError: onError,
     onSuccess: onSuccess
-  }
+  };
 })();

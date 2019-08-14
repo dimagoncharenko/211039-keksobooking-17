@@ -9,7 +9,7 @@
   let mainPinCenterCoord = {
     x: mainPin.offsetWidth / 2,
     y: mainPin.offsetHeight / 2
-  }
+  };
 
   class Coordinate {
     constructor(x, y) {
@@ -42,7 +42,7 @@
         }
 
         if (startCoord.x - mainPinCenterCoord.x < mapRect.left) {
-          pinPosition.x = - mainPinCenterCoord.x;
+          pinPosition.x = -mainPinCenterCoord.x;
         }
 
         callback(pinPosition);
@@ -60,7 +60,7 @@
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
     });
-  }
+  };
   window.slider = slider;
 
 })();

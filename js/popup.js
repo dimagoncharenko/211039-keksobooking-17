@@ -3,7 +3,6 @@
 (function () {
   const FEATURES_CLASS = 'popup__feature--';
   let popupTemplate = document.querySelector('#card').content.querySelector('.popup');
-  let mapPins = document.querySelector('.map__pins');
   let mapFilters = document.querySelector('.map__filters-container');
 
   let getHouseType = function (dataType) {
@@ -33,7 +32,7 @@
       img.src = photo;
       photosWrapper.appendChild(img);
     });
-  }
+  };
 
   let onPinClick = function (dataPin) {
     let popup = popupTemplate.cloneNode(true);
@@ -79,7 +78,7 @@
         }
         pin.classList.add('map__pin--active');
         let dataPin = dataPins[i];
-        onPinClick(dataPin)
+        onPinClick(dataPin);
       });
     });
   };
@@ -95,7 +94,7 @@
     if (activePin !== null) {
       activePin.classList.remove('map__pin--active');
     }
-  }
+  };
 
   let onPopupClose = function () {
     removeActivePinClass();

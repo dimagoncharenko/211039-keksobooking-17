@@ -11,7 +11,7 @@
   let pinStartCoord = {
     top: mainPin.style.top,
     left: mainPin.style.left
-  }
+  };
 
   let deactivateForm = function () {
     let previewPhoto = document.querySelector('.ad-form-header__preview img');
@@ -46,7 +46,9 @@
   };
 
   let onPageDeactivate = function (evt) {
-    if (evt !== undefined) evt.preventDefault();
+    if (evt !== undefined) {
+      evt.preventDefault();
+    }
     deactivateForm();
     let popup = document.querySelector('.popup');
     if (popup !== null) {
@@ -64,6 +66,6 @@
   window.statusPage = {
     onPageActivate: onPageActivate,
     onPageDeactivate: onPageDeactivate
-  }
+  };
 
 })();
