@@ -22,7 +22,7 @@
     FLAT: 1000
   };
 
-  addressInput.disabled = true;
+  addressInput.readonly = true;
 
   let onSelectTypeChange = function () {
     switch (typeSelect.value) {

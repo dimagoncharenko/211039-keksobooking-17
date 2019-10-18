@@ -30,9 +30,10 @@
   };
 
   let upload = (url, method, onLoad, onError, data) => {
+    console.log(data);
     fetch(url, {
       method: method,
-      body: JSON.stringify(data)
+      body: data
     })
       .then((response) => {
         if (response.status === STATUS_SUCCESS) {
@@ -51,6 +52,7 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    upload(Url.UPLOAD, Method.POST, window.message.onSuccess, window.message.onError, new FormData(form));
+    const data = new FormData(this);
+    upload(Url.UPLOAD, Method.POST, window.message.onSuccess, window.message.onError, data);
   });
 })();
